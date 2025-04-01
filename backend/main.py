@@ -1,14 +1,13 @@
 from fastapi import FastAPI
-from .database import engine, Base
-from .routes import router
+from backend.routes import router  
+from backend.database import engine, Base  
 
-app = FastAPI(docs=None, redoc_url=None)
+app = FastAPI(docs=None, redoc_url=None)  
 
-
-# Create tables
+# Create tables in the database
 Base.metadata.create_all(bind=engine)
 
-# Include meeting routes
+# Include API routes
 app.include_router(router)
 
 @app.get("/")
